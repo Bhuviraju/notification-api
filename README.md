@@ -108,7 +108,7 @@ This project demonstrates how modern backend systems handle \*\*asynchronous com
 
 
 
-\## 📷 Swagger UI
+\## Swagger UI
 
 
 
