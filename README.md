@@ -88,19 +88,19 @@ This project demonstrates how modern backend systems handle \*\*asynchronous com
 
 
 
-\* ✅ Event-driven architecture using Kafka
+\* Event-driven architecture using Kafka
 
-\* ✅ Asynchronous processing for better scalability
+\* Asynchronous processing for better scalability
 
-\* ✅ Retry mechanism for failed notifications
+\* Retry mechanism for failed notifications
 
-\* ✅ Status tracking (SENT / PENDING / FAILED)
+\* Status tracking (SENT / PENDING / FAILED)
 
-\* ✅ REST API integration
+\* REST API integration
 
-\* ✅ Swagger UI for API documentation
+\* Swagger UI for API documentation
 
-\* ✅ Dockerized setup for easy deployment
+\* Dockerized setup for easy deployment
 
 
 
