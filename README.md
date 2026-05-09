@@ -1,4 +1,4 @@
-\# 🚀 Kafka-Based Notification System
+\# Kafka-Based Notification System
 
 
 
@@ -10,7 +10,7 @@ A scalable \*\*event-driven backend system\*\* built using \*\*Java, Spring Boot
 
 
 
-\## 🧠 Overview
+\## Overview
 
 
 

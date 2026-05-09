@@ -7,6 +7,7 @@ import com.bhuvana.notificationapi.kafka.NotificationProducer;
 import com.bhuvana.notificationapi.repository.NotificationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,8 @@ public class NotificationService {
     private final NotificationProducer notificationProducer;
     private final NotificationRepository notificationRepository;
 
+    @Value("${kafka.enabled:true}")
+    private boolean kafkaEnabled;
     //constructor injection
     public NotificationService(NotificationProducer notificationProducer,
                                NotificationRepository notificationRepository) {
@@ -42,8 +45,15 @@ public class NotificationService {
         // Set ID in request
         request.setNotificationId(saved.getId());
 
+        if (kafkaEnabled) {
+            notificationProducer.send(request);
+        } else {
+            saved.setStatus("SENT");
+            saved.setUpdatedAt(LocalDateTime.now());
+            notificationRepository.save(saved);
+        }
         //Send to Kafka
-        notificationProducer.send(request);
+        //notificationProducer.send(request);
 
         return new NotificationResponse(
                "Notification received successfully",

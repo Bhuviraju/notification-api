@@ -3,9 +3,11 @@ package com.bhuvana.notificationapi.kafka;
 import com.bhuvana.notificationapi.config.KafkaTopicConfig;
 import com.bhuvana.notificationapi.dto.NotificationRequest;
 import com.bhuvana.notificationapi.repository.NotificationRepository;
+import com.bhuvana.notificationapi.service.EmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
@@ -15,15 +17,23 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
+// This allows Spring Boot app to start in AWS WITHOUT Kafka
+@ConditionalOnProperty(
+        name = "kafka.enabled",
+        havingValue = "true",
+        matchIfMissing = true
+)
 public class NotificationConsumer {
 
     private static final Logger log=
             LoggerFactory.getLogger(NotificationConsumer.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final NotificationRepository notificationRepository;
+    private final EmailService emailService;
 
-    public NotificationConsumer(NotificationRepository notificationRepository) {
+    public NotificationConsumer(NotificationRepository notificationRepository,EmailService emailService) {
         this.notificationRepository = notificationRepository;
+        this.emailService = emailService;
     }
 
     @RetryableTopic(
@@ -57,6 +67,7 @@ public class NotificationConsumer {
 
                 case "EMAIL":
                     log.info("Sending EMAIL to {}", request.getDestination());
+                    emailService.sendEmail(request);
                     break;
 
                 case "SMS":
@@ -109,4 +120,5 @@ public class NotificationConsumer {
                     log.info("Notification status updated to {}", status);
                 });
     }
+
 }
