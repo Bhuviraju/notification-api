@@ -1,4 +1,4 @@
-\# Kafka-Based Notification System
+\## Kafka-Based Notification System
 
 
 
@@ -108,7 +108,7 @@ This project demonstrates how modern backend systems handle \*\*asynchronous com
 
 
 
-\## 📷 Swagger UI
+\## Swagger UI
 
 
 
@@ -333,6 +333,5 @@ Backend Developer | Java | Spring Boot | Kafka
 
 
 \---
-
 
 
