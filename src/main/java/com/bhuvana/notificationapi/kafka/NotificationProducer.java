@@ -5,10 +5,15 @@ import com.bhuvana.notificationapi.dto.NotificationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConditionalOnProperty(
+        name = "KAFKA_ENABLED",
+        havingValue = "true"
+)
 public class NotificationProducer {
 
     private static final Logger log=
