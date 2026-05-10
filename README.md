@@ -1,337 +1,200 @@
-\## Kafka-Based Notification System
-
-
-
-A scalable \*\*event-driven backend system\*\* built using \*\*Java, Spring Boot, and Apache Kafka\*\*, designed to handle asynchronous notification processing (Email/SMS simulation) with reliability and fault tolerance.
-
-
-
 \---
 
+# Notification API 🚀
 
+A scalable backend Notification API built using Java, Spring Boot, MySQL, Kafka, Docker, Swagger, and AWS.
 
-\## Overview
+This project demonstrates real-world backend development concepts including REST APIs, asynchronous messaging, database integration, email notifications, Docker containerization, and cloud deployment using AWS Elastic Beanstalk + RDS.
 
+---
 
+## Features
 
-This project demonstrates how modern backend systems handle \*\*asynchronous communication\*\* using Kafka. Instead of processing requests synchronously, notifications are pushed to a message queue and processed independently.
+* Create and manage notifications
+* RESTful APIs using Spring Boot
+* MySQL database integration using Spring Data JPA
+* Kafka producer/consumer implementation
+* Email notification support
+* Swagger UI API documentation
+* Docker support
+* AWS Elastic Beanstalk deployment
+* AWS RDS MySQL integration
+* Environment variable based configuration
+* Exception handling and clean layered architecture
 
+---
 
+##Tech Stack
 
-\---
+* Java 17
+* Spring Boot
+* Spring Data JPA
+* Apache Kafka
+* MySQL
+* Maven
+* Docker
+* Swagger / OpenAPI
+* AWS Elastic Beanstalk
+* AWS RDS
 
+---
 
+## Project Structure
 
-\## Architecture
+src/main/java/com/bhuvana/notificationapi
 
+├── controller
+├── service
+├── repository
+├── entity
+├── dto
+├── config
+├── producer
+├── consumer
+└── exception
 
+---
 
-\* \*\*Producer Service\*\* → Publishes notification events to Kafka
+## API Endpoints
 
-\* \*\*Kafka Broker\*\* → Handles message queue and distribution
+### Create Notification
 
-\* \*\*Consumer Service\*\* → Processes notifications asynchronously
+POST /api/v1/notifications
 
-\* \*\*Database\*\* → Stores notification status (SENT / PENDING / FAILED)
+### Get All Notifications
 
+GET /api/v1/notifications
 
+---
 
-\---
+## Sample Request Body
 
+{
+"userId": "003",
+"type": "EMAIL",
+"message": "AWS test",
+"destination": "[example@gmail.com](mailto:example@gmail.com)"
+}
 
+---
 
-\## Tech Stack
+## Swagger UI
 
-
-
-\* \*\*Backend:\*\* Java, Spring Boot
-
-\* \*\*Messaging:\*\* Apache Kafka
-
-\* \*\*Database:\*\* PostgreSQL / H2
-
-\* \*\*API Testing:\*\* Postman
-
-\* \*\*API Documentation:\*\* Swagger (OpenAPI)
-
-\* \*\*Containerization:\*\* Docker, Docker Compose
-
-
-
-\---
-
-
-
-\## Workflow
-
-
-
-1\. Client sends notification request via REST API
-
-2\. Producer publishes message to Kafka topic
-
-3\. Kafka queues the message
-
-4\. Consumer reads message asynchronously
-
-5\. Notification is processed (Email/SMS simulation)
-
-6\. Status updated in database
-
-
-
-\---
-
-
-
-\## Features
-
-
-
-\* Event-driven architecture using Kafka
-
-\* Asynchronous processing for better scalability
-
-\* Retry mechanism for failed notifications
-
-\* Status tracking (SENT / PENDING / FAILED)
-
-\* REST API integration
-
-\* Swagger UI for API documentation
-
-\* Dockerized setup for easy deployment
-
-
-
-\---
-
-
-
-\## Swagger UI
-
-
-
-Swagger provides an interactive interface to test APIs.
-
-
-
-Access after running the application:
-
-
-
-```
+Local Swagger URL:
 
 http://localhost:8080/swagger-ui/index.html
 
-```
+AWS Hosted Swagger:
 
+http://notification-api-env.eba-fuwg2p65.ap-south-1.elasticbeanstalk.com/swagger-ui/index.html
 
+---
 
-\---
+## Screenshots
 
+api response screenshots attached
 
+## Docker Support
 
-\## Docker Setup
-
-
-
-\### Prerequisites
-
-
-
-\* Docker installed
-
-\* Docker Compose installed
-
-
-
-\### Run the Application
-
-
-
-```bash
+### Run Kafka and Zookeeper
 
 docker-compose up -d
 
-```
+---
 
+##  AWS Deployment
 
+Successfully deployed using:
 
-This will start:
+* AWS Elastic Beanstalk
+* AWS RDS MySQL
 
+### Deployment Highlights
 
+* Configured environment variables in Elastic Beanstalk
+* Integrated Spring Boot app with AWS RDS
+* Hosted live Swagger UI on AWS
+* Managed production configuration using application properties
 
-\* Kafka
+---
 
-\* Zookeeper
+## Database Configuration
 
-\* Spring Boot Application
+Environment variables used in AWS:
 
+SPRING_DATASOURCE_URL=
 
+SPRING_DATASOURCE_USERNAME=
 
-\---
+SPRING_DATASOURCE_PASSWORD=
 
+---
 
+## Email Configuration
 
-\##  API Endpoints
+Email notifications implemented using Spring Mail.
 
+Example environment variables:
 
+MAIL_USERNAME=
 
-\### Create Notification
+MAIL_PASSWORD=
 
+---
 
+##  Running Locally
 
-```http
+### Clone Repository
 
-POST /notifications
+git clone https://github.com/Bhuviraju/notification-api.git
 
-```
+### Navigate to Project
 
+cd notification-api
 
+### Build Project
 
-\*\*Request Body:\*\*
+mvn clean install
 
+### Run Application
 
+mvn spring-boot:run
 
-```json
+---
 
-{
+## Future Enhancements
 
-&#x20; "userId": "401",
+* SMS Notification Integration
+* Retry Mechanism
+* Authentication & Authorization
+* Notification Status Tracking
+* Rate Limiting
+* CI/CD Pipeline
+* Kubernetes Deployment
 
-&#x20; "type": "EMAIL",
+---
 
-&#x20; "destination": "test@gmail.com",
 
-&#x20; "message": "Test notification"
 
-}
+## Project Outcome
 
-```
+This project helped in gaining hands-on experience with:
 
+* Backend architecture
+* Cloud deployment
+* Kafka integration
+* Production configuration
+* Database connectivity
+* REST API development
+* Real-world deployment troubleshooting
 
+## Author
 
-\---
+Bhuvaneshwari
 
+Backend Developer | Java | Spring Boot | Kafka | AWS
 
-
-\### Get All Notifications
-
-
-
-```http
-
-GET /notifications
-
-```
-
-
-
-\---
-
-
-
-\## Testing
-
-
-
-\* Use \*\*Postman\*\* to test APIs
-
-\* Verify message flow in Kafka
-
-\* Check database for status updates
-
-
-
-\---
-
-
-
-\## Sample Response
-
-
-
-```json
-
-{
-
-&#x20; "id": 1,
-
-&#x20; "userId": "401",
-
-&#x20; "type": "EMAIL",
-
-&#x20; "destination": "test@gmail.com",
-
-&#x20; "message": "Status success test",
-
-&#x20; "status": "SENT",
-
-&#x20; "createdAt": "2026-05-03T22:07:31"
-
-}
-
-```
-
-
-
-\---
-
-
-
-\## Key Learnings
-
-
-
-\* Event-driven architecture design
-
-\* Kafka producer-consumer model
-
-\* Asynchronous system handling
-
-\* API documentation using Swagger
-
-\* Containerization using Docker
-
-\* Handling failures and retries
-
-
-
-\---
-
-
-
-\## Future Enhancements
-
-
-
-\* Add email/SMS integration (real services)
-
-\* Implement authentication (JWT)
-
-\* Add monitoring (Prometheus + Grafana)
-
-\* Deploy to cloud (AWS / GCP)
-
-\* Add rate limiting \& circuit breaker
-
-
-
-\---
-
-
-
-\## Author
-
-
-
-\*\*Bhuvaneshwari P\*\*
-
-Backend Developer | Java | Spring Boot | Kafka
-
-
-
-\---
+GitHub:
+https://github.com/Bhuviraju/notification-api/
 
 
