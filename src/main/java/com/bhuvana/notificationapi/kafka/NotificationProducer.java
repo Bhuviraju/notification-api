@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnProperty(
-        name = "kafka.enabled",
+        name = "KAFKA_ENABLED",
         havingValue = "true"
 )
 public class NotificationProducer {
