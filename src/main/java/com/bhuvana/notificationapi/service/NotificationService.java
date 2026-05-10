@@ -20,7 +20,7 @@ public class NotificationService {
     private final NotificationProducer notificationProducer;
     private final NotificationRepository notificationRepository;
 
-    @Value("${KAFKA_ENABLED}")
+    @Value("${kafka.enabled}")
     private boolean kafkaEnabled;
     //constructor injection
     public NotificationService(NotificationProducer notificationProducer,

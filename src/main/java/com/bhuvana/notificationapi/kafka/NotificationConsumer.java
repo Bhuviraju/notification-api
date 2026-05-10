@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Service
 // This allows Spring Boot app to start in AWS WITHOUT Kafka
 @ConditionalOnProperty(
-        name = "KAFKA_ENABLED",
+        name = "kafka.enabled",
         havingValue = "true",
         matchIfMissing = true
 )
